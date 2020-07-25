@@ -1,0 +1,206 @@
+/* 환승구간 */
+CREATE TABLE tblTransfer (
+	seq NUMBER NOT NULL, /* 번호 */
+	transsection VARCHAR2(10) NOT NULL, /* 환승구간 */
+	ls_1seq NUMBER NOT NULL, /* 호선+역번호 */
+	ls_2seq NUMBER NOT NULL /* 환승 방향 */
+--    time number not null /* 도보시간 */
+);
+
+select ls.seq, st.name,ld.destination,li.name    from tbllinestation ls inner join tblstation st on ls.staseq = st.seq 
+inner join tbllineroute lr on ls.linerouteseq = lr.seq inner join tbllinedirec ld on lr.linedirecseq= ld.seq
+    inner join tblLine li on ld.lineseq = li.seq
+where st.name in ('잠실','가락시장','김포공항','여의도','올림픽공원','당산','종합운동장','노량진','동작','고속터미널','석촌','대곡') ;
+
+
+select ls.seq, st.name,ld.destination,li.name    from tbllinestation ls inner join tblstation st on ls.staseq = st.seq 
+inner join tbllineroute lr on ls.linerouteseq = lr.seq inner join tbllinedirec ld on lr.linedirecseq= ld.seq
+    inner join tblLine li on ld.lineseq = li.seq
+where st.name in ('동대문') ;
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '', , );
+
+--가락시장
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-1',773, 1256,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-1', 773, 1273,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '9-4', 692, 1256,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '9-4', 692, 1273,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1256, 773,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1256, 692,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-4', 1273, 773,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-4', 1273, 692,5);
+
+--고속터미널
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 1172, 1298,11);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 1172, 1347,11);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-1', 1172, 762,4);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-1', 1172, 703,4);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1223, 1298,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1223, 1347,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1223, 762,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1223, 703,7);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1298,1172,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1298,1223,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1298,762,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1298,703,6);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1347,1172,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1347,1223,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1347,762,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1347,703,8);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-3', 762,1172,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-3', 762,1223,8);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '9-2', 762,1298,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '9-2', 762,1347,7);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 703,1172,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 703,1223,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 703,1298,9);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 703,1347,9);
+
+--김포공항
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 943,1330,12);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-2', 943,1319,12);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-3', 943,1368,3);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '7-3', 943,1379,3);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-4', 900,1330,14);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-4', 900,1319,14);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-4', 900,1368,11);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-4', 900,1379,11);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1330,943,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1330,900,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1319,943,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-4', 1319,900,6);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 1368,943,9);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 1368,900,9);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 1379,943,9);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 1379,900,9);
+
+--노량진
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,446,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,516,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,206,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,311,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,530,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,98,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,373,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,583,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,133,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,238,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1304,25,6);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,446,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,516,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,206,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,311,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,530,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,98,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,373,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,583,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,133,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,238,6);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1353,25,6);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 373,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 373,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 583,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 583,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 133,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 133,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 238,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 238,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 25,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 25,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 530,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 530,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 98,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 98,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 446,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 446,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 516,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 516,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 206,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 206,1353,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 311,1304,10);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-2', 311,1353,10);
+
+--대곡
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1454,727,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1394,727,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1454,738,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '5-3', 1394,738,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1520,727,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1424,727,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1520,738,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 1424,738,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 727,1454,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 727,1394,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 727,1520,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 727,1424,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 738,1454,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 738,1394,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 738,1520,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-1', 738,1424,5);
+
+
+--동작
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-3', 800,1350,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-3', 800,1301,7);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 843,1350,7);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-1', 843,1301,7);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1350,800,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1350,843,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-4', 1301,800,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-4', 1301,843,5);
+
+--석촌
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1337,1271,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '4-2', 1337,1254,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 1288,1271,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 1288,1254,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-4', 1271,1337,4);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '6-4', 1271,1288,4);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1288,1337,4);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '1-1', 1288,1288,4);
+
+--여의도
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 1355,957,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 1355,914,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1306,957,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '2-3', 1306,914,5);
+
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 957,1355,5);
+insert into tblTransfer (seq,transsection,ls_1seq,ls_2seq,time) values (transfer_seq.nextVal, '3-3', 957,1306,5);
+
+
+
+
+
+
+
+
+
+1045	여의도	오이도행	4호선
+1000	여의도	당고개행	4호선
+
+1068	올림픽공원	오이도행	4호선
+1023	올림픽공원	당고개행	4호선
+
+1334	올림픽공원	중앙보훈병원행	9호선
+1285	올림픽공원	개화행	9호선
