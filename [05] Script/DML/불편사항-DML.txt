@@ -1,0 +1,44 @@
+/* 조회 */
+create or replace view vwcomplain
+as select c.seq as "seq", c.content as "content", a.content as "answer", (decode(c.answer,0,'O','X')) as "state",  to_char(c.comdate,'yyyy--mm--dd') as "date", c.cusseq as cusseq, c.answer as stat
+    from tblcomplain c
+        left outer join tblanswer a
+            on a.comseq = c.seq
+                where c.delflag <> 1;
+
+/* 접수 */
+create or replace procedure proccomplainRegister(
+pcontent varchar2,
+pcusseq number,
+plseq number
+)
+is 
+begin
+    insert into tblcomplain values(complain_seq.nextVal,pcontent,sysdate,default,plseq,pcusseq,default);
+end proccomplainRegister;
+
+/* 삭제 */
+create or replace procedure proccomplainDelect(
+pseq number
+)
+is 
+begin
+      update tblcomplain set delflag = 1 where seq = pseq;
+end proccomplainDelect;
+
+
+/* 수정 */
+create or replace view vwcomplainSelect
+    as select * from tblcomplain where delflag <> 1;
+
+
+create or replace procedure proccomplainUpdate(
+    pseq number,
+    pcontent varchar2
+    --plocseq number
+   
+)
+is 
+begin 
+    update tblcomplain set content = pcontent where seq = pseq;
+end  proccomplainUpdate;

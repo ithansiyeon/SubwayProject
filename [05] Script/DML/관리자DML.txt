@@ -1,0 +1,166 @@
+<----------정희수 지하철 관리자 DML------------->
+
+
+<------불편사항 답변 하기 ------>
+
+----- 지하철 답변 목록 출력 뷰 -------
+create or replace view vwadmincomplain    
+as select c.seq as "seq", c.content as "CustomerSay",a.content as "AdminSay" ,to_char(c.comdate,'yyyy-mm-dd')as "date", c.cusseq as "cusseq",decode(c.answer,'0','답변완료','1','답변대기')as "answer"
+from tblcomplain c left outer join tblanswer a on c.seq = a.comseq; 
+
+---- 답변하기 프로시저 -------
+create or replace PROCEDURE procAnswer (s
+pseq number,            --불편사항번호
+pcontent VARCHAR2,      --답변
+padseq number           --관리자 번호         
+)
+is
+begin
+insert into tblAnswer values (Answer_seq.nextVal,pcontent,default,pseq,padseq);
+end;
+
+
+------ 답변 수정하기 프로시저 ------
+create or replace PROCEDURE procAnswer_Clean (
+pcontent varchar2,      -- 답변
+pcomseq number,         --불편사항 번호
+padseq number           --관리자 번호
+)
+is
+    pseq number;            --답변 번호
+    pdelflag number;
+begin
+    select seq into pseq from tblAnswer where comseq = pcomseq;
+    select delflag into pdelflag from tblAnswer where seq = pseq;
+    if pdelflag = 0 then
+        update tblAnswer set content = pcontent, comseq = pcomseq, adseq= padseq where seq = pseq;
+    else
+        null;
+    end if;
+end;
+
+
+
+
+------답변 삭제 할 목록 출력문 ------
+select a.seq as \"seq\", c.content as \"CustomerSay\",a.content as \"AdminSay\" ,to_char(c.comdate,'yyyy-mm-dd')as \"date\", c.cusseq as \"cusseq\",decode(c.answer,'0','답변완료','1','답변대기')as \"answer\"\r\n 
+	from tblcomplain c left outer join tblanswer a on c.seq = a.comseq where a.delflag = 0;
+
+
+
+------답변 삭제 프로시저 ------
+create or replace PROCEDURE procAnswer_delete (
+pseq number  --답변 번호
+
+)
+is
+    pdelflag number;
+begin
+select delflag into pdelflag from tblAnswer where seq = pseq;
+if pdelflag = 0 then 
+    update tblAnswer set delflag = 1 where seq = pseq;
+    else 
+        null;
+        end if;
+end;
+
+
+
+
+<------ 열차 위치 조회 ------>
+
+------ 호선 번호 출력문 ------
+select rownum,a.* from(select distinct name from vwTrainPosition ORDER by name)a;
+
+------ 열차 방면 출력문 ------
+select rownum,a.* from(select distinct  name, destination,lrseq  from vwTrainPosition  where liseq =" + hosun + " ORDER by name)a
+
+
+------ 선택한 기차 번호 출력문 ------
+select rownum,a.* from(  select DISTINCT tr.seq, ld.destination, li.name,li.seq as liseq,tr.seq as trainNum, lr.seq as lrseq from 
+ tbltrain tr inner join tbllineroute lr on tr.linerouteseq = lr.seq
+ inner join tbllinedirec ld on lr.linedirecseq = ld.seq
+ inner join tblline li on ld.lineseq = li.seq
+ inner join tblTrainseat ts on ts.trseq = tr.seq 
+ where li.seq= "+ hosun + "and lr.seq =" + trainNum.get(Integer.parseInt(bangmyeon)-1) +
+order by li.name, tr.seq)a;
+
+
+
+------ 선택한 기차의 현재 위치 출력문 ------
+   select rownum,a.* from(  select  tr.seq, ld.destination, li.name,li.seq as liseq,tr.seq as trainNum , lr.seq as lrseq, st.name as stName,
+  ls.staorder as 순서, to_char(tl.time,'hh24:mi') as 시간 
+ from tbltrain tr inner join tbllineroute lr on tr.linerouteseq = lr.seq
+  inner join tbllinedirec ld on lr.linedirecseq = ld.seq 
+  inner join tblline li on ld.lineseq = li.seq 
+  inner join tblTrainlocation tl on tl.trseq= tr.seq 
+ inner join tblLineStation ls on ls.seq = tl.lsseq
+ inner join tblStation st on st.seq = ls.staseq
+ where tr.seq =" +  tNum +
+ order by tl.time desc)a;
+
+
+
+
+
+<------ 열차 혼잡도 조회------>
+
+------ 호선 번호 출력 ------
+select rownum,a.* from(select distinct name from vwTrainPosition ORDER by name)a;
+
+------ 열차 방면 출력 ------
+select rownum,a.* from(select distinct  name, destination,lrseq  from vwTrainPosition  where liseq =" + hosun + " ORDER by name)a;
+
+------ 열차 번호 출력 ------
+select rownum,a.* from(  select DISTINCT tr.seq, ld.destination, li.name,li.seq as liseq,tr.seq as trainNum, lr.seq as lrseq from 
+ tbltrain tr inner join tbllineroute lr on tr.linerouteseq = lr.seq 
+ inner join tbllinedirec ld on lr.linedirecseq = ld.seq 
+ inner join tblline li on ld.lineseq = li.seq
+inner join tblTrainseat ts on ts.trseq = tr.seq
+ where li.seq= "+ hosun + "and lr.seq =" + trainNum.get(Integer.parseInt(bangmyeon)-1) +
+ order by li.name, tr.seq)a;
+
+
+
+
+
+
+
+------ 선택한 열차 혼잡도 출력 ------
+ select  ts.seq as roomnum,
+ case   when  c.peoplenum < ts.avgnum then '원활'
+when  c.peoplenum > ts.avgnum then '혼잡'" + 
+when  c.peoplenum <= ts.avgnum then '보통' 
+ end as chaos
+inner join tbllinedirec ld on lr.linedirecseq = ld.seq     
+ inner join tblline li on ld.lineseq = li.seq  
+ inner join tblTrainlocation tl on tl.trseq= tr.seq 
+inner join tblLineStation ls on ls.seq = tl.lsseq
+ inner join tblStation st on st.seq = ls.staseq   
+inner join tblCongestion c on c.locseq = tl.seq 
+ inner join tblTrainSeat ts on ts.seq = c.tsseq  
+where tr.seq ="+tNum;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
