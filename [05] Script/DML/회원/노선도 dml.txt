@@ -1,0 +1,60 @@
+﻿-------------호선에 무슨 역이 있는지 보는 뷰
+create or replace view vwSeelineStation
+as
+select distinct st.name,li.name as liname   from tbllinestation ls inner join tblstation st on ls.staseq = st.seq 
+inner join tbllineroute lr on ls.linerouteseq =lr.seq inner join tbltrain tr on tr.linerouteseq = lr.seq
+inner join tblline li on tr.lineseq = li.seq order by st.name;
+
+
+--------------------호선 선택시 무슨 역 있는 지 볼 수 있는 프로시저
+
+create or replace procedure procSeelinestation(
+    pnum number,     --선택받을 호선 번호                     
+    presult out sys_refcursor
+
+)
+is
+    pname varchar2(20);
+begin
+    select name into pname from tblLine where seq = pnum;
+    open presult 
+    for
+    select * from vwSeelinestation where liname = pname;
+end procSeelinestation;
+
+
+
+------------------------즐겨찾기 추가 dml
+
+create or replace procedure procAddbookmark(
+    pcusseq number,
+    plsseq number
+)
+is
+begin
+  insert into tblbookmark values (BOOKMARK_SEQ.nextval, pcusseq, plsseq, default);  
+end;
+
+------각 호선, 방향별 역 순서보여주는 뷰(급행, 일반 나눠서)
+create or replace view vwSeeorder
+as 
+select ls.seq, ls.staorder, st.name as stname, ld.destination, li.name as liname, stt.state
+from tbllinestation ls inner join tblstation st on ls.staseq = st.seq
+inner join tbllineroute lr on ls.linerouteseq = lr.seq 
+inner join tbllinedirec ld on lr.linedirecseq = ld.seq
+inner join tblline li on ld.lineseq = li.seq 
+inner join tblstate stt on lr.stateseq = stt.seq
+order by ls.staorder;
+
+
+
+-- 각 기차별 호선과 행, 시작시간,  끝시간, 급행 or 일반행 열차 구분
+
+create or replace view vwseetrainschedule
+as
+select tr.seq,li.name,ld.destination , sc.days, to_char(sc.starttime, 'hh24:mi') as starttime, to_char(sc.endtime, 'hh24:mi') as endtime, sc.runorder, stt.state from tbltrain tr inner join tblline li on tr.lineseq = li.seq 
+inner join tbllineroute lr on lr.seq = tr.linerouteseq
+inner join tblschedule sc on tr.seq = sc.trainseq
+inner join tbllinedirec ld on lr.linedirecseq = ld.seq
+inner join tblstate stt on lr.stateseq = stt.seq
+order by runorder;
