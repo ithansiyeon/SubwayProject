@@ -1,0 +1,63 @@
+--1 특정 고객이 입력한 출발역
+--procStart
+
+create or replace procedure procStart(
+    
+    num number, --입력받은 고객번호 
+    presult out sys_refcursor
+)
+is
+begin
+    open presult for
+    select * from vwStart where cusseq = num;
+end;    
+
+ 
+--2 모든 고객의 출발역 정보 목록 
+--vwStart
+
+create or replace view vwStart
+as
+select st.name , s.seq  , ls.staseq  , ls.staorder  , ld.lineseq  , ld.destination , ls.linerouteseq , s.cusseq as cusseq
+            from tbllinestation ls --호선+역  
+                inner join tblstart s --출발역
+                    on ls.seq = s.lsseq 
+                        inner join tblstation st --역이름
+                             on st.seq = ls.staseq
+                                inner join tbllineroute lr --호선루트
+                                    on ls.linerouteseq = lr.seq 
+                                        inner join tbllinedirec ld --방면
+                                            on ld.seq = lr.linedirecseq
+                                                    order by s.cusseq , ls.staseq;   
+
+
+
+--3. 특정 고객이 입력한 도착역
+--procArr
+
+create or replace procedure procArr (
+    num number,
+    presult out sys_refcursor
+)
+is
+begin
+    open presult for 
+    select * from vwArr where cusseq = num;
+end;
+
+
+
+--4.모든 고객의 도착역 정보 
+create or replace view vwArr
+as
+select st.name , a.seq , ls.staseq , ls.staorder  , ld.lineseq, ld.destination  , ls.linerouteseq , a.cusseq 
+    from tbllinestation ls --호선+역  
+            inner join tblarrival a --도착역
+                on ls.seq = a.lsseq 
+                    inner join tblstation st --역이름
+                        on st.seq = ls.staseq
+                            inner join tbllineroute lr --호선루트
+                                on ls.linerouteseq = lr.seq 
+                                    inner join tbllinedirec ld --방면
+                                        on ld.seq = lr.linedirecseq
+                                                order by a.cusseq , ls.staseq; 
