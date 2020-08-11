@@ -77,10 +77,10 @@
     </tr>
     <tr>
         <th>화면설계</th>
-        <th colspan="3">회원</th>
-        <th>관리자</th>
         <th colspan="2">회원</th>
-
+        <th>관리자</th>
+        <th colspan="3">회원</th>
+    </tr>
     <tr>
         <th>소스(코딩)</th>
         <th>로그인, 회원 즐겨찾기 구현 및 루트 탐색 코드 구현</th>
