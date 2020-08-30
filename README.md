@@ -45,6 +45,25 @@
 
 관계형 데이터베이스 기반의 지하철 노선 탐색/시간 알림 프로그램입니다.
 
+
+### 🧠 Algorithm
+
+- <b>지하철 출발역과 도착역 사이의 최단 경로를 찾는 알고리즘 구현 단계</b>
+
+1. 출발역~도착역 사이의 거리를 어떻게 잴 것인지를 설계
+<img src="https://user-images.githubusercontent.com/55887059/91658923-413c7100-eb07-11ea-8163-38d40ef31d32.jpeg" width="50%">
+
+2. 경로 탐색을 그림으로 표현
+<img src="https://user-images.githubusercontent.com/55887059/91659167-48647e80-eb09-11ea-98d8-8f540b7b0790.jpeg" width="50%">
+
+3. 역 하나하나를 class로 설계
+<img src="https://user-images.githubusercontent.com/55887059/91659208-8a8dc000-eb09-11ea-8b6d-7ad7eb8dc2e2.png" width="50%">
+
+4. 최단경로찾기 구현
+<img src="https://user-images.githubusercontent.com/55887059/91658944-629d5d00-eb07-11ea-85a5-a4fb765e2c15.png" width="50%">
+
+
+
  ### 👋 Member
  ![회원](https://user-images.githubusercontent.com/55887059/89887469-4c3b6a00-dc09-11ea-97a3-bcb5ca74c962.gif)
  ### 👋 Admin
@@ -88,7 +107,7 @@
         <th>관리자 불편사항 답변 및 실시간 열차 혼잡도 코드 구현<br>
         <th>회원 역 탐색 및 루트 탐색 코드 구현</th>
         <th>회원 역 탐색 및 루트 탐색 코드 구현</th>
-        <th>회원 실시간 불편사항 접수 코드 구현</th>
+        <th>회원 메뉴 구현, 실시간 불편사항 접수 코드 구현</th>
     </tr>
     <tr>
         <th>역할</th>
