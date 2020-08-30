@@ -15,7 +15,7 @@
         <th>세미 프로젝트</th>
         <th>개발인원</th>
         <th>팀 / 6명<br>
-          (<a href="https://github.com/prohwww">전혜원</a>｜김영현｜정희수｜윤희선｜조윤경｜한시연)
+          (<a href="https://github.com/prohwww">전혜원</a>｜<a href="https://github.com/Kimyoung-hyun">김영현</a>｜<a href="https://github.com/Heesu-Jeong">정희수</a>｜<a href="https://github.com/Yoon-Hee-Sun">윤희선</a>｜<a href="https://github.com/joyoonkyung">조윤경</a>｜<a href="https://github.com/prohwww">한시연</a>)
       </th>
     </tr>
       <tr>
