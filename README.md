@@ -37,6 +37,10 @@
         <th>개발도구</th>
         <th colspan="3">Eclipse JEE, Oracle SQL Developer, eXERD</th>
     </tr>
+     <tr>
+          <th>사용기술</th>
+          <th colspan="3">JDBC</th>
+      </tr>
 </table>
 
 ### 📼 Appearance
