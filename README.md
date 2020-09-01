@@ -20,9 +20,7 @@
     </tr>
       <tr>
         <th>프로젝트 개요</th>
-        <th>실시간 지하철 노선 시간 알림 프로그램</th>
-        <th>개발환경&nbsp;</th>
-        <th>Windows10</th>
+        <th colspan="2">실시간 지하철 노선 시간 알림 프로그램</th>
     </tr>
     <tr>
         <th colspan="5">사용 도구</th>
