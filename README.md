@@ -43,11 +43,6 @@
       </tr>
 </table>
 
-### 📼 Appearance
-
-관계형 데이터베이스 기반의 지하철 노선 탐색/시간 알림 프로그램입니다.
-
-
 ### 🧠 Algorithm
 
 - <b>지하철 출발역과 도착역 사이의 최단 경로를 찾는 알고리즘 구현</b>
@@ -65,6 +60,8 @@
 <img src="https://user-images.githubusercontent.com/55887059/91658944-629d5d00-eb07-11ea-85a5-a4fb765e2c15.png" width="50%">
 
 
+### 📼 Appearance
+관계형 데이터베이스 기반의 지하철 노선 탐색/시간 알림 프로그램입니다.
 
  ### 👋 Member
  ![회원](https://user-images.githubusercontent.com/55887059/89887469-4c3b6a00-dc09-11ea-97a3-bcb5ca74c962.gif)
