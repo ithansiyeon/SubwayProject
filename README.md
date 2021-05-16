@@ -1,4 +1,4 @@
-# Subway Project
+# subway-project
 <img src="https://user-images.githubusercontent.com/55887059/89888053-4c883500-dc0a-11ea-9508-3da0aa5b8fbc.png" width="80%">
 
 ### 👋 Introduction
